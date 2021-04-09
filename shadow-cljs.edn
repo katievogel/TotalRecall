@@ -1,0 +1,12 @@
+;; shadow-cljs configuration
+{:deps true
+ :builds
+
+       {:app {:target :browser
+              :output-dir "docs/js"
+              :main com.github.katievogel.totalrecall.core/init!
+              :modules {:main {:entries [com.github.katievogel.totalrecall.core]}}
+              :devtools {:repl-init-ns com.github.katievogel.totalrecall.core
+                         :repl-pprint true
+                         :http-root "docs/"
+                         :http-port 8080}}}}
