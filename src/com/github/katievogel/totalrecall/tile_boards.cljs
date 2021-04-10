@@ -1,9 +1,10 @@
 (ns com.github.katievogel.totalrecall.tile-boards
-  (:require [reagent.dom]))
+  (:require [com.github.katievogel.totalrecall.play-action]
+            [reagent.dom]
+            [re-frame.core :as rf]))
 
 ;grid of tiles with images
 ;grid must be randomizable to create new game
-
 
 (def tile-pair-map [{:id 1 :pair 1 :face-up false}
                     {:id 2 :pair 1 :face-up false}
@@ -26,17 +27,14 @@
                     {:id 19 :pair 10 :face-up false}
                     {:id 20 :pair 10 :face-up false}])
 
-(comment
-  (group-by :id tile-pair-map))
-
-(->> tile-pair-map
-     shuffle
-     (partition 4))
-
 (defn tile-randomizer [tile-pair-map]
-  (for [{:keys [pair id]}
+  (for [{:keys [pair id] :as record}
         (shuffle tile-pair-map)]
-    [:div.col [:div.p-3.border.bg-light "pair:" pair " id:" id]]))
+    ^{:key id} [:div.col [:div.p-3.border.bg-light
+                          {:on-click (fn []
+                                       (rf/dispatch [:pick-tile record])
+                                       (println "clicked, id: " id))}
+                          "pair:" pair " id:" id]]))
 
 (defn TileBoard []
   [:div.container
