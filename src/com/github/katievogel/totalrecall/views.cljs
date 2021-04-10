@@ -8,7 +8,7 @@
    [:h1 "Total Recall App"]
    [ScoreBoard]
    [TileBoard]
-   #_[:pre (pr-str @(rf/subscribe [:get-db]))]])
+   [:pre (pr-str @(rf/subscribe [:get-db]))]])
 
 
 ;headers
