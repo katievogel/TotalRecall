@@ -5,7 +5,7 @@
 ;app-db contains:
 ;player name
 ;scores
-;tiles states - up or down
+;tiles picks, states - up or down
 ;strikes
 
 (def initial-state
@@ -13,7 +13,7 @@
    :score 0
    :strikes 0
    :all-tiles-face-down true
-   :first-pick {:tile-id nil :pair nil :face-up false}
-   :second-pick {:tile-id nil :pair nil :face-up false}}
+   :first-pick nil #_{:tile-id nil :pair nil :face-up false}
+   :second-pick nil #_{:tile-id nil :pair nil :face-up false}})
 
-  (defonce app-db (r/atom initial-state)))
+(defonce app-db (r/atom initial-state))
