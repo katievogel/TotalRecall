@@ -8,22 +8,22 @@ cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.prim_seq.cljs$c
 
 return (com.github.katievogel.totalrecall.core.begin_render_BANG_.cljs$core$IFn$_invoke$arity$0 ? com.github.katievogel.totalrecall.core.begin_render_BANG_.cljs$core$IFn$_invoke$arity$0() : com.github.katievogel.totalrecall.core.begin_render_BANG_.call(null));
 });
-var target_obj_44683_44689 = window;
-var _STAR_runtime_state_STAR__orig_val__44687_44690 = oops.state._STAR_runtime_state_STAR_;
-var _STAR_runtime_state_STAR__temp_val__44688_44691 = oops.state.prepare_state(target_obj_44683_44689,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
-(oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR__temp_val__44688_44691);
+var target_obj_43259_43265 = window;
+var _STAR_runtime_state_STAR__orig_val__43263_43266 = oops.state._STAR_runtime_state_STAR_;
+var _STAR_runtime_state_STAR__temp_val__43264_43267 = oops.state.prepare_state(target_obj_43259_43265,(new Error()),function(){arguments[0].apply(console,Array.prototype.slice.call(arguments,1))});
+(oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR__temp_val__43264_43267);
 
-try{var call_info_44685_44692 = [target_obj_44683_44689,(function (){var next_obj_44686 = ((oops.core.validate_object_access_dynamically(target_obj_44683_44689,(0),"addEventListener",true,true,false))?(target_obj_44683_44689["addEventListener"]):null);
-return next_obj_44686;
+try{var call_info_43261_43268 = [target_obj_43259_43265,(function (){var next_obj_43262 = ((oops.core.validate_object_access_dynamically(target_obj_43259_43265,(0),"addEventListener",true,true,false))?(target_obj_43259_43265["addEventListener"]):null);
+return next_obj_43262;
 })()];
-var fn_44684_44693 = (call_info_44685_44692[(1)]);
-if(oops.core.validate_fn_call_dynamically(fn_44684_44693,oops.state.get_last_access_modifier())){
-if((!((fn_44684_44693 == null)))){
-fn_44684_44693.call((call_info_44685_44692[(0)]),"load",com.github.katievogel.totalrecall.core.init_BANG_);
+var fn_43260_43269 = (call_info_43261_43268[(1)]);
+if(oops.core.validate_fn_call_dynamically(fn_43260_43269,oops.state.get_last_access_modifier())){
+if((!((fn_43260_43269 == null)))){
+fn_43260_43269.call((call_info_43261_43268[(0)]),"load",com.github.katievogel.totalrecall.core.init_BANG_);
 } else {
 }
 } else {
 }
-}finally {(oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR__orig_val__44687_44690);
+}finally {(oops.state._STAR_runtime_state_STAR_ = _STAR_runtime_state_STAR__orig_val__43263_43266);
 }
 //# sourceMappingURL=com.github.katievogel.totalrecall.core.js.map
