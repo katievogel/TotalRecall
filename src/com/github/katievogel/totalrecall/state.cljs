@@ -13,7 +13,7 @@
    :score 0
    :strikes 0
    :all-tiles-face-down true
-   :first-pick nil #_{:tile-id nil :pair nil :face-up false}
-   :second-pick nil #_{:tile-id nil :pair nil :face-up false}})
+   :first-pick nil
+   :second-pick nil})
 
 (defonce app-db (r/atom initial-state))
