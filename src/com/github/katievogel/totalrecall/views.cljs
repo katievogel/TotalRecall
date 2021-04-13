@@ -7,6 +7,8 @@
   [:div
    [:h1 "Total Recall App"]
    [ScoreBoard]
+   [:button {:on-click (fn [] (rf/dispatch [:temp-clear]))}
+    "temp - clear picks"]
    [TileBoard]
    [:pre (pr-str @(rf/subscribe [:get-db]))]])
 
