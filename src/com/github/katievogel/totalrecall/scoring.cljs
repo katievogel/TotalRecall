@@ -1,4 +1,5 @@
-(ns com.github.katievogel.totalrecall.scoring)
+(ns com.github.katievogel.totalrecall.scoring
+  (:require [re-frame.core :as rf]))
 
 
 ;score: num pairs matched
@@ -9,9 +10,5 @@
 (defn ScoreBoard []
   [:div.scoreboard
    [:p.scoring "1 point per pair matched. 5 points per board cleared."]
-   [:p "Score: 000000"]
-   [:p "Strikes: X X X"]])
-
-;(defn score []
-;  (cond (= :tile-id :tile-id) (inc score)
-;        :else (inc strike)))
+   [:div  "Score: " @(rf/subscribe [:show-score])]
+   [:div "Strikes: " @(rf/subscribe [:show-strikes])]])
