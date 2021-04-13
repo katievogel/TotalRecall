@@ -19,24 +19,31 @@
 (rf/reg-event-db
   :pick-tile
   (fn [db [_ record]]
-   (cond
-      (= (:first-pick db) nil) (assoc db :first-pick record)
-      (= (:second-pick db) nil) (-> db
-                                  (assoc :second-pick record)
-                                  (pick-tile-eval))
-      :else db)))
+    (let [strikes (:strikes db)]
+      (cond
+        (>= strikes 3) db
+        (= (:first-pick db) nil) (assoc db :first-pick record)
+        (= (:second-pick db) nil) (-> db
+                                      (assoc :second-pick record)
+                                      (pick-tile-eval))
+        :else db))))
 
+(rf/reg-event-db
+  :temp-clear
+  (fn [db]
+    (-> db
+        (assoc :first-pick nil)
+        (assoc :second-pick nil))))
 
+(rf/reg-sub
+  :show-score
+  (fn [db [_]]
+    (:score db)))
 
-;(rf/reg-sub
-;  :get-first-tile-pick
-;  (fn [db [_]]
-;    (:first-pick db)))
-;
-;(rf/reg-sub
-;  :get-second-tile-pick
-;  (fn [db [_]]
-;    (:second-pick db)))
+(rf/reg-sub
+  :show-strikes
+  (fn [db [_]]
+    (:strikes db)))
 
 
 ;----just for seeing state on page----
