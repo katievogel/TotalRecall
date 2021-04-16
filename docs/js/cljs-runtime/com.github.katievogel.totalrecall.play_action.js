@@ -9,10 +9,10 @@ return cljs.core.update_in.cljs$core$IFn$_invoke$arity$3(db,new cljs.core.Persis
 
 }
 });
-re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"pick-tile","pick-tile",-2012375543),(function (db,p__43344){
-var vec__43345 = p__43344;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43345,(0),null);
-var record = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43345,(1),null);
+re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"pick-tile","pick-tile",-2012375543),(function (db,p__43421){
+var vec__43422 = p__43421;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43422,(0),null);
+var record = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43422,(1),null);
 var strikes = new cljs.core.Keyword(null,"strikes","strikes",-327043906).cljs$core$IFn$_invoke$arity$1(db);
 if((strikes >= (3))){
 return db;
@@ -29,22 +29,38 @@ return db;
 }
 }
 }));
+re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"shuffle-tiles","shuffle-tiles",-1960397157),(function (db){
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(db,new cljs.core.Keyword(null,"board","board",-1907017633),cljs.core.shuffle(com.github.katievogel.totalrecall.state.tile_pair_map));
+}));
 re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"temp-clear","temp-clear",617853998),(function (db){
 return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(db,new cljs.core.Keyword(null,"first-pick","first-pick",469108243),null),new cljs.core.Keyword(null,"second-pick","second-pick",346937067),null);
 }));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.Keyword(null,"show-score","show-score",-113505229),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__43348){
-var vec__43349 = p__43348;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43349,(0),null);
+re_frame.core.reg_event_db.cljs$core$IFn$_invoke$arity$2(new cljs.core.Keyword(null,"hide-start","hide-start",1971184144),(function (db){
+return cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(db,new cljs.core.Keyword(null,"start-button-display","start-button-display",1929305852),true);
+}));
+re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.Keyword(null,"show-score","show-score",-113505229),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__43425){
+var vec__43426 = p__43425;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43426,(0),null);
 return new cljs.core.Keyword(null,"score","score",-1963588780).cljs$core$IFn$_invoke$arity$1(db);
 })], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.Keyword(null,"show-strikes","show-strikes",-1652124718),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__43352){
-var vec__43353 = p__43352;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43353,(0),null);
+re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.Keyword(null,"show-strikes","show-strikes",-1652124718),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__43429){
+var vec__43430 = p__43429;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43430,(0),null);
 return new cljs.core.Keyword(null,"strikes","strikes",-327043906).cljs$core$IFn$_invoke$arity$1(db);
 })], 0));
-re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.Keyword(null,"get-db","get-db",-630166596),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__43356){
-var vec__43357 = p__43356;
-var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43357,(0),null);
+re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.Keyword(null,"get-board","get-board",-174318601),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__43433){
+var vec__43434 = p__43433;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43434,(0),null);
+return new cljs.core.Keyword(null,"board","board",-1907017633).cljs$core$IFn$_invoke$arity$1(db);
+})], 0));
+re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.Keyword(null,"get-start-display","get-start-display",2058406297),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__43437){
+var vec__43438 = p__43437;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43438,(0),null);
+return new cljs.core.Keyword(null,"start-button-display","start-button-display",1929305852).cljs$core$IFn$_invoke$arity$1(db);
+})], 0));
+re_frame.core.reg_sub.cljs$core$IFn$_invoke$arity$variadic(new cljs.core.Keyword(null,"get-db","get-db",-630166596),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([(function (db,p__43441){
+var vec__43442 = p__43441;
+var _ = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__43442,(0),null);
 return db;
 })], 0));
 
