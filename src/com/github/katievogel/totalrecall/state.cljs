@@ -38,6 +38,4 @@
    :board nil
    :start-button-display false})
 
-; (shuffle tile-pair-map)
-
 (defonce app-db (r/atom initial-state))

@@ -45,6 +45,11 @@
   (fn [db]
     (assoc db :start-button-display true)))
 
+(rf/reg-event-db
+  :reset-game
+  (fn [_db]
+    state/initial-state))
+
 (rf/reg-sub
   :show-score
   (fn [db [_]]
@@ -64,7 +69,6 @@
   :get-start-display
   (fn [db [_]]
     (:start-button-display db)))
-
 
 ;----just for seeing state on page----
 (rf/reg-sub

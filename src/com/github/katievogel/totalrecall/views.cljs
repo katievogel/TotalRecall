@@ -19,6 +19,12 @@
     [:button {:disabled (>= strikes 3)
               :on-click (fn [] (rf/dispatch [:shuffle-tiles]))} "Next Board"]))
 
+(defn NewGame []
+  (let [strikes @(rf/subscribe [:show-strikes])]
+    [:button {:style    {:display (if (< strikes 3) "none" nil)}
+              :on-click (fn []
+                          (rf/dispatch [:reset-game]))} "New Game"]))
+
 (defn TotalRecallApp []
   [:div
    [:h1 "Total Recall App"]
@@ -26,6 +32,7 @@
    [:button {:on-click (fn [] (rf/dispatch [:temp-clear]))}
     "temp - clear picks"]
    [NextBoard]
+   [NewGame]
    [StartGame]
    [TileBoard]
    [:pre (pr-str @(rf/subscribe [:get-db]))]])
