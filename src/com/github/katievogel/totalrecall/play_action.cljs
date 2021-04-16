@@ -1,5 +1,5 @@
 (ns com.github.katievogel.totalrecall.play-action
-  (:require [com.github.katievogel.totalrecall.state :refer [initial-state]]
+  (:require [com.github.katievogel.totalrecall.state :as state]
             [re-frame.core :as rf]))
 
 
@@ -29,11 +29,21 @@
         :else db))))
 
 (rf/reg-event-db
+  :shuffle-tiles
+  (fn [db]
+    (assoc db :board (shuffle state/tile-pair-map))))
+
+(rf/reg-event-db
   :temp-clear
   (fn [db]
     (-> db
         (assoc :first-pick nil)
         (assoc :second-pick nil))))
+
+(rf/reg-event-db
+  :hide-start
+  (fn [db]
+    (assoc db :start-button-display true)))
 
 (rf/reg-sub
   :show-score
@@ -45,6 +55,15 @@
   (fn [db [_]]
     (:strikes db)))
 
+(rf/reg-sub
+  :get-board
+  (fn [db [_]]
+    (:board db)))
+
+(rf/reg-sub
+  :get-start-display
+  (fn [db [_]]
+    (:start-button-display db)))
 
 ;----just for seeing state on page----
 (rf/reg-sub
