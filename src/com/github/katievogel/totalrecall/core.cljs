@@ -2,15 +2,11 @@
   (:require [com.github.katievogel.totalrecall.views :refer [TotalRecallApp]]
             [goog.dom :as gdom]
             [goog.functions :as gfunctions]
-            [oops.core :refer [ocall oget oset!]]
+            [oops.core :refer [ocall]]
             [re-frame.core :as rf]
             [reagent.dom :as reagent-dom]))
 
 (def app-container-el (gdom/getElement "appContainer"))
-
-;(defn on-refresh
-;  (rf/clear-subscription-cache!)
-;  (reagent-dom/force-update-all))
 
 (def begin-render!
   (gfunctions/once
@@ -19,6 +15,7 @@
 
 (defn init! []
   (println "it's running")
+  (rf/dispatch-sync [:reset-game])
   (begin-render!))
 
 (ocall js/window "addEventListener" "load" init!)
