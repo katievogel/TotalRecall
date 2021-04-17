@@ -30,12 +30,10 @@
                     {:id 20 :pair 10 :image "assets/taco.png" :face-up false}])
 
 (def initial-state
-  {:score nil
-   :strikes nil
+  {:score 0
+   :strikes 0
    :all-tiles-face-down true
    :first-pick nil
    :second-pick nil
    :board nil
    :start-button-display false})
-
-(defonce app-db (r/atom initial-state))
