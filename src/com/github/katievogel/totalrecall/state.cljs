@@ -30,8 +30,8 @@
                     {:id 20 :pair 10 :image "assets/taco.png" :face-up false}])
 
 (def initial-state
-  {:score 0
-   :strikes 0
+  {:score nil
+   :strikes nil
    :all-tiles-face-down true
    :first-pick nil
    :second-pick nil
