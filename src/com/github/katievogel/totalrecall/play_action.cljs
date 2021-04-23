@@ -34,6 +34,17 @@
     (assoc db :board (shuffle state/tile-pair-map))))
 
 (rf/reg-event-db
+  :pair-complete
+  (fn [db]
+    (let [first-pick-pair (get-in db [:first-pick :pair])
+          second-pick-pair (get-in db [:second-pick :pair])
+          first-pick-id (get-in db [:first-pick :id])
+          second-pick-id (get-in db [:second-pick :id])]
+      (cond
+          (= first-pick-pair second-pick-pair) (update db :cleared-pairs (fn [x] (conj x first-pick-id second-pick-id)))
+          :else db))))
+
+(rf/reg-event-db
   :temp-clear
   (fn [db]
     (-> db
@@ -64,6 +75,11 @@
   :get-board
   (fn [db [_]]
     (:board db)))
+
+(rf/reg-sub
+  :check-cleared-pairs
+  (fn [db [_]]
+    (:cleared-pairs db)))
 
 (rf/reg-sub
   :get-start-display
