@@ -1,6 +1,7 @@
 (ns com.github.katievogel.totalrecall.views
   (:require [com.github.katievogel.totalrecall.tile-boards :refer [TileBoard]]
-            [re-frame.core :as rf]))
+            [re-frame.core :as rf]
+            [clojure.pprint]))
 
 (defn ScoreBoard []
   [:div.scoreboard
@@ -35,4 +36,7 @@
    [NewGame]
    [StartGame]
    [TileBoard]
-   [:pre (pr-str @(rf/subscribe [:get-db]))]])
+
+   [:pre
+    #_(pr-str @(rf/subscribe [:get-db]))
+    (with-out-str (clojure.pprint/pprint @(rf/subscribe [:get-db])))]])
