@@ -10,10 +10,10 @@
    [:div "Strikes: " @(rf/subscribe [:show-strikes])]])
 
 (defn StartGame []
-  [:button {:style    {:display (if @(rf/subscribe [:get-start-display]) "none" nil)}
-            :on-click (fn []
-                        (rf/dispatch [:hide-start])
-                        (rf/dispatch [:shuffle-tiles]))} "Start Game"])
+  [:button.btn.btn-success.btn-lg.start-button {:style    {:display (if @(rf/subscribe [:get-start-display]) "none" nil)}
+                                                :on-click (fn []
+                                                            (rf/dispatch [:hide-start])
+                                                            (rf/dispatch [:shuffle-tiles]))} "Start Game"])
 
 (defn NextBoard []
   (let [score @(rf/subscribe [:show-score])]
@@ -27,16 +27,20 @@
                           (rf/dispatch [:reset-game]))} "New Game"]))
 
 (defn TotalRecallApp []
-  [:div
-   [:h1 "Total Recall App"]
-   [ScoreBoard]
-   [:button {:on-click (fn [] (rf/dispatch [:temp-clear]))}
-    "temp - clear picks"]
-   [NextBoard]
-   [NewGame]
-   [StartGame]
-   [TileBoard]
+  [:div.container
+   [:nav.navbar.topnav.navbar-dark.bg-light
+    [:h1 "Food Pairings"]
+    [:p "I'll take pizza, with a side of pizza."]]
+   [:nav.navbar.bottomnav.navbar-dark.bg-primary
+    [ScoreBoard]]
+   [:div
+    [:button {:on-click (fn [] (rf/dispatch [:temp-clear]))}
+     "temp - clear picks"]
+    [NextBoard]
+    [NewGame]
+    [StartGame]
+    [TileBoard]
 
-   [:pre
-    #_(pr-str @(rf/subscribe [:get-db]))
-    (with-out-str (clojure.pprint/pprint @(rf/subscribe [:get-db])))]])
+    [:pre
+     #_(pr-str @(rf/subscribe [:get-db]))
+     (with-out-str (clojure.pprint/pprint @(rf/subscribe [:get-db])))]]])
