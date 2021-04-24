@@ -2,13 +2,22 @@
   (:require [com.github.katievogel.totalrecall.state :as state]
             [re-frame.core :as rf]))
 
+;...on start...
+;start button is clicked
+;function to show all tiles face up for 3s and then flip over
+;state for each tile is updated for those 3s, then reverts
 
+;...game play...
 ;player clicks tile
-;tile flips
-;player clicks another tile
-;tile flips
-;if matches, tiles stay flipped
-;if wrong, flip back over
+;function to flip tile fires
+;state for face-up updates
+;player clicks second tile
+;function to flip tile fires again
+;state for face-up updates
+;if the tiles match, the tiles stay flipped and state remains updated
+;if the tiles do not match, then the tiles will flip back over after 3 s,
+;..and state updates again.
+
 (defn pick-tile-eval [db]
   (let [first-pick-pair (get-in db [:first-pick :pair])
         second-pick-pair (get-in db [:second-pick :pair])]
