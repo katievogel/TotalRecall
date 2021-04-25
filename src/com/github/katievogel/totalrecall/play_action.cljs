@@ -54,26 +54,17 @@
           (= first-pick-pair second-pick-pair) (update db :cleared-pairs (fn [x] (conj x first-pick second-pick)))
           :else db))))
 
-;(rf/reg-event-db
-;  :temp-clear
-;  (fn [{:keys [first-pick second-pick cleared-pairs] :as db}]
-;    (let [first-desired-state (contains? cleared-pairs first-pick)
-;          second-desired-state (contains? cleared-pairs second-pick)]
-;      (-> db
-;          (assoc-in [:tile-pair-map first-pick :face-up] first-desired-state)
-;          (assoc-in [:tile-pair-map second-pick :face-up] second-desired-state)))
-;
-;
-;
-;    (if (contains? cleared-pairs first-pick)
-;      (assoc-in db [:tile-pair-map first-pick :face-up] false))
-;
-;
-;    (-> db
-;        (assoc :first-pick nil)
-;        (assoc :second-pick nil)
-;        (cond
-;          (get-in db [:cleared-pairs id])))))
+(rf/reg-event-db
+  :temp-clear
+  (fn [{:keys [first-pick second-pick cleared-pairs] :as db}]
+    (let [first-desired-state (contains? cleared-pairs first-pick)
+          second-desired-state (contains? cleared-pairs second-pick)]
+      (-> db
+          (assoc-in [:tile-pair-map first-pick :face-up] first-desired-state)
+          (assoc-in [:tile-pair-map second-pick :face-up] second-desired-state)
+          (assoc-in [:first-pick] nil)
+          (assoc-in [:second-pick] nil)))))
+
 
 (rf/reg-event-db
   :hide-start
