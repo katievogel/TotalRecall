@@ -92,10 +92,15 @@
     (:board db)))
 
 (rf/reg-sub
+  :get-picks
+  (fn [db [_]]
+    #{(:first-pick db)
+      (:second-pick db)}))
+
+(rf/reg-sub
   :get-tile
   (fn [db [_ id]]
     (get-in db [:tile-pair-map id])))
-
 
 (rf/reg-sub
   :check-cleared-pairs
