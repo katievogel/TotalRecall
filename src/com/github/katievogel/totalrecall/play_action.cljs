@@ -12,7 +12,7 @@
 ;function to flip tile fires
 ;state for face-up updates
 ;player clicks second tile
-;function to flip tile fires again
+;function to flip tile over again
 ;state for face-up updates
 ;if the tiles match, the tiles stay flipped and state remains updated
 ;if the tiles do not match, then the tiles will flip back over after 3 s,
@@ -22,8 +22,13 @@
   (let [first-pick-pair (get-in db [:tile-pair-map first-pick :pair])
         second-pick-pair (get-in db [:tile-pair-map second-pick :pair])]
     (cond
-      (= first-pick-pair second-pick-pair) (update-in db [:score] inc)
-      :else (update-in db [:strikes] inc))))
+      (= first-pick-pair second-pick-pair) (-> db
+                                             (update-in [:score] inc)
+                                             (assoc-in [:first-pick] nil)
+                                             (assoc-in [:second-pick] nil))
+      :else (do
+              (js/setTimeout (fn [] (rf/dispatch [:clear-picks-flip-back]))3000)
+              (update-in db [:strikes] inc)))))
 
 (rf/reg-event-db
   :pick-tile
@@ -43,7 +48,9 @@
 (rf/reg-event-db
   :shuffle-tiles
   (fn [db]
-    (assoc db :board (shuffle (keys (:tile-pair-map db))))))
+    (do
+      (js/setTimeout (fn [] (rf/dispatch [:do-timed-tile-flip])) 5000)
+      (assoc db :board (shuffle (keys (:tile-pair-map db)))))))
 
 (rf/reg-event-db
   :pair-complete
@@ -55,7 +62,7 @@
           :else db))))
 
 (rf/reg-event-db
-  :temp-clear
+  :clear-picks-flip-back
   (fn [{:keys [first-pick second-pick cleared-pairs] :as db}]
     (let [first-desired-state (contains? cleared-pairs first-pick)
           second-desired-state (contains? cleared-pairs second-pick)]
@@ -64,7 +71,6 @@
           (assoc-in [:tile-pair-map second-pick :face-up] second-desired-state)
           (assoc-in [:first-pick] nil)
           (assoc-in [:second-pick] nil)))))
-
 
 (rf/reg-event-db
   :hide-start
@@ -75,6 +81,14 @@
   :reset-game
   (fn [_db]
     state/initial-state))
+
+(rf/reg-event-db
+  :do-timed-tile-flip
+  (fn [db]
+    (println "flipping")
+    (-> db
+        (assoc-in [:tile-pair-map :face-up] false))))
+
 
 (rf/reg-sub
   :show-score
