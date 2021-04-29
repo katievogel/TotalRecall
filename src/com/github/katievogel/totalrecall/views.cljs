@@ -34,8 +34,6 @@
    [:nav.navbar.bottomnav.navbar-dark.bg-primary
     [ScoreBoard]]
    [:div
-    [:button {:on-click (fn [] (rf/dispatch [:temp-clear]))}
-     "temp - clear picks"]
     [NextBoard]
     [NewGame]
     [StartGame]
