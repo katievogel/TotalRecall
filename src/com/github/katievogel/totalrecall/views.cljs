@@ -17,14 +17,14 @@
 
 (defn NextBoard []
   (let [score @(rf/subscribe [:show-score])]
-    [:button {:style    {:display (if (and (zero? (mod score 10)) (not= score 0) (not= score nil)) "initial" "none")}
-              :on-click (fn [] (rf/dispatch [:shuffle-tiles]))} "Next Board"]))
+    [:button.next-board {:style    {:display (if (and (zero? (mod score 4)) (not= score 0)) "initial" "none")}
+                         :on-click (fn [] (rf/dispatch [:shuffle-tiles]))} "Next Board"]))
 
 (defn NewGame []
   (let [strikes @(rf/subscribe [:show-strikes])]
-    [:button {:style    {:display (if (< strikes 3) "none" nil)}
-              :on-click (fn []
-                          (rf/dispatch [:reset-game]))} "New Game"]))
+    [:button.new-game {:style    {:display (if (< strikes 3) "none" nil)}
+                       :on-click (fn []
+                                   (rf/dispatch [:reset-game]))} "New Game"]))
 
 (defn TotalRecallApp []
   [:div.container
