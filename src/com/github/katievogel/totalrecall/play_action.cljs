@@ -2,22 +2,6 @@
   (:require [com.github.katievogel.totalrecall.state :as state]
             [re-frame.core :as rf]))
 
-;...on start...
-;start button is clicked
-;function to show all tiles face up for 3s and then flip over
-;state for each tile is updated for those 3s, then reverts
-
-;...game play...
-;player clicks tile
-;function to flip tile fires
-;state for face-up updates
-;player clicks second tile
-;function to flip tile over again
-;state for face-up updates
-;if the tiles match, the tiles stay flipped and state remains updated
-;if the tiles do not match, then the tiles will flip back over after 3 s,
-;..and state updates again.
-
 (defn pick-tile-eval [{:keys [first-pick second-pick] :as db}]
   (let [first-pick-pair (get-in db [:tile-pair-map first-pick :pair])
         second-pick-pair (get-in db [:tile-pair-map second-pick :pair])]
@@ -36,13 +20,13 @@
     (let [strikes (:strikes db)]
       (cond
         (>= strikes 3) db
-        (= (:first-pick db) nil) (-> db
-                                     (assoc :first-pick id)
-                                     (assoc-in [:tile-pair-map id :face-up] true))
-        (= (:second-pick db) nil) (-> db
-                                      (assoc :second-pick id)
-                                      (assoc-in [:tile-pair-map id :face-up] true)
-                                      (pick-tile-eval))
+        (not (:first-pick db)) (-> db
+                                   (assoc :first-pick id)
+                                   (assoc-in [:tile-pair-map id :face-up] true))
+        (not (:second-pick db)) (-> db
+                                    (assoc :second-pick id)
+                                    (assoc-in [:tile-pair-map id :face-up] true)
+                                    (pick-tile-eval))
         :else db))))
 
 (rf/reg-event-db
@@ -84,11 +68,12 @@
 
 (rf/reg-event-db
   :do-timed-tile-flip
-  (fn [db]
+  (fn [{:keys [tile-pair-map] :as db}]
     (println "flipping")
-    (-> db
-        (assoc-in [:tile-pair-map :face-up] false))))
-
+    (let [new-map (into {}
+                        (map (fn [[key value]]
+                               [key (assoc value :face-up false)]) tile-pair-map))]
+      (assoc db :tile-pair-map new-map))))
 
 (rf/reg-sub
   :show-score
