@@ -6,6 +6,18 @@
     display: grid;
 }
 
+.next-board {
+    background-color: #00BFFF;
+    margin: auto;
+    padding: 50px;
+}
+
+.new-game {
+    background-color: #DC143C;
+    margin: auto;
+    padding: 50px;
+}
+
 .topnav {
     justify-content: center;
 }
