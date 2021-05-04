@@ -17,12 +17,9 @@
                 [:div.flip-card-inner
                  [:div.flip-card-front
                   {:class    [(when (contains? check-pairs id) "disabled")]
-                   :disabled true
                    :on-click (fn []
-                               (println "clicked, id: " id "a " check-pairs)
                                (when-not (or (contains? check-pairs id) (contains? get-picks id))
-                                 (rf/dispatch [:pick-tile id])
-                                 (rf/dispatch [:pair-complete])))}
+                                 (rf/dispatch [:pick-tile id])))}
                   [:img {:src (let [{:keys [image face-up]} @(rf/subscribe [:get-tile id])]
                                 (if face-up image))}]]
                  [:div.flip-card-back]]]]))]))
