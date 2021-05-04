@@ -7,9 +7,10 @@
         second-pick-pair (get-in db [:tile-pair-map second-pick :pair])]
     (cond
       (= first-pick-pair second-pick-pair) (-> db
-                                             (update-in [:score] inc)
-                                             (assoc-in [:first-pick] nil)
-                                             (assoc-in [:second-pick] nil))
+                                               (update :cleared-pairs (fn [x] (conj x first-pick second-pick)))
+                                               (update-in [:score] inc)
+                                               (assoc-in [:first-pick] nil)
+                                               (assoc-in [:second-pick] nil))
       :else (do
               (js/setTimeout (fn [] (rf/dispatch [:clear-picks-flip-back]))3000)
               (update-in db [:strikes] inc)))))
@@ -35,15 +36,6 @@
     (do
       (js/setTimeout (fn [] (rf/dispatch [:do-timed-tile-flip])) 5000)
       (assoc db :board (shuffle (keys (:tile-pair-map db)))))))
-
-(rf/reg-event-db
-  :pair-complete
-  (fn [{:keys [first-pick second-pick] :as db}]
-    (let [first-pick-pair (get-in db [:tile-pair-map first-pick :pair])
-          second-pick-pair (get-in db [:tile-pair-map second-pick :pair])]
-      (cond
-          (= first-pick-pair second-pick-pair) (update db :cleared-pairs (fn [x] (conj x first-pick second-pick)))
-          :else db))))
 
 (rf/reg-event-db
   :clear-picks-flip-back
