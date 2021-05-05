@@ -26,5 +26,5 @@
                     19 {:pair 10 :image "assets/taco.png" :face-up true}
                     20 {:pair 10 :image "assets/taco.png" :face-up true}}
    :board nil
-   :start-button-display false
+   :timeout-id nil
    :cleared-pairs #{}})

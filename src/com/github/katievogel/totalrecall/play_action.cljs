@@ -11,9 +11,12 @@
                                                (update-in [:score] inc)
                                                (assoc-in [:first-pick] nil)
                                                (assoc-in [:second-pick] nil))
-      :else (do
-              (js/setTimeout (fn [] (rf/dispatch [:clear-picks-flip-back]))3000)
-              (update-in db [:strikes] inc)))))
+      :else (let [tid (js/setTimeout (fn [] (rf/dispatch [:flip-tiles-back]))3000)]
+              (-> db
+                  (update-in [:strikes] inc)
+                  (assoc-in [:timeout-id] tid)
+                  (assoc-in [:first-pick] nil)
+                  (assoc-in [:second-pick] nil))))))
 
 (rf/reg-event-db
   :pick-tile
@@ -38,7 +41,7 @@
       (assoc db :board (shuffle (keys (:tile-pair-map db)))))))
 
 (rf/reg-event-db
-  :clear-picks-flip-back
+  :flip-tiles-back
   (fn [{:keys [first-pick second-pick cleared-pairs] :as db}]
     (let [first-desired-state (contains? cleared-pairs first-pick)
           second-desired-state (contains? cleared-pairs second-pick)]
@@ -102,6 +105,7 @@
   :get-start-display
   (fn [db [_]]
     (:start-button-display db)))
+
 
 ;----just for seeing state on page----
 (rf/reg-sub
