@@ -21,9 +21,11 @@
                          :on-click (fn [] (rf/dispatch [:shuffle-tiles]))} "Next Board"]))
 
 (defn NewGame []
-  (let [strikes @(rf/subscribe [:show-strikes])]
+  (let [strikes @(rf/subscribe [:show-strikes])
+        timeout-id @(rf/subscribe [:get-timeout-id])]
     [:button.new-game {:style    {:display (if (< strikes 3) "none" nil)}
                        :on-click (fn []
+                                   (js/clearTimeout timeout-id)
                                    (rf/dispatch [:reset-game]))} "New Game"]))
 
 (defn TotalRecallApp []

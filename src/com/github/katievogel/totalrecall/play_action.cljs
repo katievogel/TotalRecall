@@ -11,12 +11,13 @@
                                                (update-in [:score] inc)
                                                (assoc-in [:first-pick] nil)
                                                (assoc-in [:second-pick] nil))
-      :else (let [tid (js/setTimeout (fn [] (rf/dispatch [:flip-tiles-back]))3000)]
+      :else (let [tid (js/setTimeout (fn [] (rf/dispatch [:flip-tiles-back first-pick second-pick] ))3000)]
+              (println "timeout running")
               (-> db
                   (update-in [:strikes] inc)
-                  (assoc-in [:timeout-id] tid)
-                  (assoc-in [:first-pick] nil)
-                  (assoc-in [:second-pick] nil))))))
+                  (assoc :timeout-id tid)
+                  (assoc :first-pick nil)
+                  (assoc :second-pick nil))))))
 
 (rf/reg-event-db
   :pick-tile
@@ -35,21 +36,20 @@
 
 (rf/reg-event-db
   :shuffle-tiles
-  (fn [db]
+  (fn [db _]
     (do
       (js/setTimeout (fn [] (rf/dispatch [:do-timed-tile-flip])) 5000)
       (assoc db :board (shuffle (keys (:tile-pair-map db)))))))
 
 (rf/reg-event-db
   :flip-tiles-back
-  (fn [{:keys [first-pick second-pick cleared-pairs] :as db}]
+  (fn [{:keys [cleared-pairs] :as db} [_ first-pick second-pick]]
+    (println "file tiles back")
     (let [first-desired-state (contains? cleared-pairs first-pick)
           second-desired-state (contains? cleared-pairs second-pick)]
       (-> db
           (assoc-in [:tile-pair-map first-pick :face-up] first-desired-state)
-          (assoc-in [:tile-pair-map second-pick :face-up] second-desired-state)
-          (assoc-in [:first-pick] nil)
-          (assoc-in [:second-pick] nil)))))
+          (assoc-in [:tile-pair-map second-pick :face-up] second-desired-state)))))
 
 (rf/reg-event-db
   :hide-start
@@ -69,6 +69,11 @@
                         (map (fn [[key value]]
                                [key (assoc value :face-up false)]) tile-pair-map))]
       (assoc db :tile-pair-map new-map))))
+
+(rf/reg-sub
+  :get-timeout-id
+  (fn [db [_]]
+    (:timeout-id db)))
 
 (rf/reg-sub
   :show-score
