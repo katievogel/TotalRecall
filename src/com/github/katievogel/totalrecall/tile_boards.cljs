@@ -4,6 +4,10 @@
             [re-frame.core :as rf]))
 
 
+;(defn flip-action [{:keys [face-up] :as db}]
+;  (let [face-up-status (get-in db [:tile-pair-map face-up :face-up])]
+;    (if face-up-status (js/card.classlist.toggle "is-flipped"))))
+
 (defn render-tile []
   (let [board @(rf/subscribe [:get-board])
         check-pairs @(rf/subscribe [:check-cleared-pairs])
@@ -11,18 +15,20 @@
     (println "check-pairs: " check-pairs)
     [:<>
      (doall (for [id board]
-              ^{:key id}
-              [:div.col
-               [:div.p-3.border.bg-light.flip-card
-                [:div.flip-card-inner
-                 [:div.flip-card-front
-                  {:class    [(when (contains? check-pairs id) "disabled")]
-                   :on-click (fn []
-                               (when-not (or (contains? check-pairs id) (contains? get-picks id))
-                                 (rf/dispatch [:pick-tile id])))}
-                  [:img {:src (let [{:keys [image face-up]} @(rf/subscribe [:get-tile id])]
-                                (if face-up image))}]]
-                 [:div.flip-card-back]]]]))]))
+              (let [{:keys [image face-up]} @(rf/subscribe [:get-tile id])]
+                ^{:key id}
+                [:div.col
+                 [:div.p-3.border.bg-light.tile-flip-space
+                  [:div.card {:class (if face-up "is-flipped" nil)}
+                   [:div.tile-face.tile-face-back
+                    {:class    [(when (contains? check-pairs id) "disabled")]}
+                    [:img {:src image}]]
+                   [:div.tile-face.tile-face-front
+                    {:on-click (fn []
+                                 (when-not (or (contains? check-pairs id) (contains? get-picks id))
+                                   (rf/dispatch [:pick-tile id])))}]]]])))]))
+
+
 
 
 (defn TileBoard []

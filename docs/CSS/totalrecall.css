@@ -29,65 +29,43 @@ p {
     margin: auto;
 }
 
-
-
-
-
-
-
-
-/* card flipping examples
-
-.flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 200px;
-  border: 1px solid #f1f1f1;
-  text-align: center;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+img {
+    margin: auto;
+}
+.tile-flip-space {
+    height: 225px;
+    width: 225px;
+    perspective: 600px;
+    align-content: center;
+    margin: auto;
 }
 
-/* This container is needed to position the front and back side */
-/*
-.flip-card-inner {
+.card {
+  width: 100%; height: 100%;
   position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
+  transition: transform 1s;
   transform-style: preserve-3d;
+  background-color: #fff0;
 }
 
-
-/* Do an horizontal flip when you move the mouse over the flip box container */
-
-/*
-.flip-card:hover .flip-card-inner {
+.card.is-flipped {
   transform: rotateY(180deg);
 }
 
-/* Position the front and back side */
-/*
-.flip-card-front, .flip-card-back {
+.tile-face {
   position: absolute;
-  width: 100%;
   height: 100%;
+  width: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-/* Style the front side (fallback if image is missing) */
-/*
-.flip-card-front {
-   background-color: dodgerblue;
-   color: white;
-   transform: rotateY(180deg);
+.tile-face-front {
+  background: #e9f7ff;
 }
 
-/* Style the back side */
-/*
-.flip-card-back {
-  background-color: #bbb;
-  color: black;
+.tile-face-back {
+  background: #9fdcff;
+  transform: rotateY( 180deg );
 }
-*/
+
