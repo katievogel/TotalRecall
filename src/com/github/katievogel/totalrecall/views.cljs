@@ -30,10 +30,10 @@
 
 (defn TotalRecallApp []
   [:div.container
-   [:nav.navbar.topnav.navbar-dark.bg-light
-    [:h1 "Food Pairings"]
-    [:p "I'll take pizza, with a side of pizza."]]
-   [:nav.navbar.bottomnav.navbar-dark.bg-primary
+   [:div.topnav
+    [:div.title [:h1 "Food Pairings"]]
+    [:div.sub-title [:p "I'll take pizza, with a side of pizza."]]]
+   [:nav.navbar.bottomnav
     [ScoreBoard]]
    [:div
     [NextBoard]
@@ -41,6 +41,6 @@
     [StartGame]
     [TileBoard]
 
-    [:pre
-     #_(pr-str @(rf/subscribe [:get-db]))
-     (with-out-str (clojure.pprint/pprint @(rf/subscribe [:get-db])))]]])
+    #_[:pre
+       #_(pr-str @(rf/subscribe [:get-db]))
+       (with-out-str (clojure.pprint/pprint @(rf/subscribe [:get-db])))]]])
