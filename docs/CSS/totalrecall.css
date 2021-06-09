@@ -49,6 +49,13 @@ h1 {
     margin: 15px;
     justify-content: center;
     display: block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: x-large;
+}
+
+.scoreboard {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: x-large;
 }
 
 img {
